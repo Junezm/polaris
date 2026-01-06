@@ -7,9 +7,10 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
-import { ThemeProvider } from "@/components/theme-provider"
+} from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
+import { ThemeProvider } from "@/components/theme-provider";
+import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 
 import "./globals.css";
 
@@ -64,7 +65,9 @@ export default function RootLayout({
                 <UserButton />
               </SignedIn>
             </header>
-            {children}
+            <ConvexClientProvider>
+              {children}
+            </ConvexClientProvider>
           </ThemeProvider>
         </body>
       </html>
