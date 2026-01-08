@@ -1,16 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 export default function Home() {
-  const tasks = useQuery(api.tasks.get);
-  console.log(tasks);
+  const projects = useQuery(api.projects.get);
+  const createProject = useMutation(api.projects.create);
+  console.log(projects);
   return <div className="text-red-400">
-    <Button>asdasd</Button>
-    {tasks?.map((task) => (
-      <div key={task._id}>{task.text}--{`${task.isCompleted}`}</div>
+    <Button onClick={() => createProject({ name: "test", ownerId: "1" })}>createProject</Button>
+    {projects?.map((project) => (
+      <div key={project._id}>{project.name}--{`${project.ownerId}`}</div>
     ))}
   </div>;
 }
