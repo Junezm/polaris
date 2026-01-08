@@ -8,7 +8,7 @@
  * @module
  */
 
-import type * as projects fro../ projects.jscts.js";
+import type * as projects from "../projects.js";
 
 import type {
   ApiFromModules,
