@@ -3,7 +3,6 @@ import { IBM_Plex_Mono, Inter } from "next/font/google";
 import ConvexClientProvider from "@/components/providers";
 
 import "./globals.css";
-import { Authenticated } from "convex/react";
 
 const inter = Inter({
   variable: "--font-inter",

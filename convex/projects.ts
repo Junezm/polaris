@@ -15,8 +15,7 @@ export const create = mutation({
 
 		await ctx.db.insert("projects", {
 			name: args.name,
-			ownerId: args.ownerId,
-			importStatus: "importing",
+			ownerId: identity.subject,
 		});
 	},
 });
@@ -30,7 +29,10 @@ export const get = query({
 			return [];
 			// throw new Error("Unauthorized");
 		}
-		return await ctx.db.query("projects").collect();
+		return await ctx.db
+			.query("projects")
+			.withIndex("by_owner", (q) => q.eq("ownerId", identity.subject))
+			.collect();
 	},
 });
 
