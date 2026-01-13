@@ -3,12 +3,6 @@ import { google } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
 import OpenAI from "openai";
 
-// const openai = createOpenAI({
-//   // custom settings, e.g.
-//   baseURL: "https://api-inference.modelscope.cn/v1",
-//   apiKey: "ms-a4aee938-1f20-4bc1-8ba3-86eef1318320",
-// });
-
 const openai = new OpenAI({
   // 若没有配置环境变量，请用百炼API Key将下行替换为：apiKey: "sk-xxx",
   apiKey: process.env.DASHSCOPE_API_KEY,
