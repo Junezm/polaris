@@ -11,7 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 
-
 export const UnauthenticatedView = () => {
   return (
     <div className="flex items-center justify-center h-screen">
@@ -22,19 +21,17 @@ export const UnauthenticatedView = () => {
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Unauthorized Access</ItemTitle>
-            <ItemDescription>You must be signed in to view this page.</ItemDescription>
+            <ItemDescription>
+              You must be signed in to view this page.
+            </ItemDescription>
           </ItemContent>
           <ItemActions>
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full"
-            >
+            <Button variant="outline" size="sm" className="w-full" asChild>
               <SignInButton />
             </Button>
           </ItemActions>
         </Item>
       </div>
-    </div >
+    </div>
   );
-}
+};

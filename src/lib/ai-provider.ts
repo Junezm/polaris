@@ -1,6 +1,3 @@
-import { generateText } from "ai";
-import { google } from "@ai-sdk/google";
-import { createOpenAI } from "@ai-sdk/openai";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -9,20 +6,20 @@ const openai = new OpenAI({
   baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
 });
 
-async function main() {
+export async function generateText(prompt: string) {
   const completion = await openai.chat.completions.create({
-    model: "qwen-plus", //此处以qwen-plus为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
+    model: "qwen-flash", //此处以qwen-plus为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
     messages: [
       { role: "system", content: "You are a helpful assistant." },
-      { role: "user", content: "今天成都天气怎么样？" },
+      { role: "user", content: prompt },
     ],
   });
   console.log(JSON.stringify(completion));
   return completion;
 }
 
-export async function POST() {
-  const response = await main();
-
-  return Response.json({ response });
-}
+// {
+//   "data": {
+//     "prompt": "What is 'middleware.js' in Next.js? Here are the docs: https://nextjs.org/docs/app/getting-started/proxy "
+//   }
+// }
