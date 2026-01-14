@@ -21,6 +21,18 @@ export default function DemoPage() {
     setLoading2(false);
   };
 
+  const handleClientError = () => {
+    throw new Error("client error: something went wrong in the browser");
+  }
+
+  const handleApiError = async () => {
+    await fetch("/api/demo/error", { method: "POST" });
+  }
+
+  const handleInngestError = async () => {
+    await fetch("/api/demo/inngest-error", { method: "POST" });
+  }
+
   return (
     <div className="p-8 space-x-4">
       <Button onClick={handleBlocking}>
