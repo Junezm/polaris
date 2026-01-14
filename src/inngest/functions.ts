@@ -1,8 +1,8 @@
 import { generateText } from "@/lib/ai-provider";
 import { inngest } from "./client";
-// import { google } from "@ai-sdk/google";
 // import { openai } from "@ai-sdk/openai";
 import { firecrawl } from "@/lib/firecrawl";
+import { google } from "@ai-sdk/google";
 
 const URL_REGEX = /https?:\/\/[^\s]+/gi;
 // "What is 'middleware.js' in Next.js? Here are the docs: https://nextjs.org/docs/app/getting-started/proxy ".match(
@@ -37,7 +37,27 @@ export const demoGenerate = inngest.createFunction(
       : prompt;
     await step.sleep("wait-a-moment", "1s");
     await step.run("generate-text", async () => {
-      return await generateText(finalPrompt as string);
+      // return await generateText(finalPrompt as string);
+      return await generateText({
+        model: google('gemini-2.5-flash'),
+        prompt: finalPrompt,
+        experimental_telemetry: {
+          isEnabled: true,
+          recordInputs: true,
+          recordOutputs: true,
+        },
+      });
     });
   }
 );
+
+
+export const demoError = inngest.createFunction(
+  { id: "demo-error" },
+  { event: "demo/error" },
+  async ({ event, step }) => {
+    await step.run("failed", () => {
+      throw new Error("inngest error: background job failed");
+    })
+  }
+)

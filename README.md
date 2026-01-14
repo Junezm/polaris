@@ -43,3 +43,5 @@ npx --ignore-scripts=false inngest-cli@latest dev
 
 ## run convex
 npx convex dev
+
+SENTRY_AUTH_TOKEN=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

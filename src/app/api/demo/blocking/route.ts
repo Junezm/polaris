@@ -22,6 +22,17 @@ async function main() {
 }
 
 export async function POST() {
+
+  // const response = await generateText({
+  //   model: google("gemini-2.5-flash"),
+  //   prompt: "Hello, how are you?",
+  //   experimental_telemetry: {
+  //     isEnabled: true,
+  //     recordInputs: true,
+  //     recordOutputs: true,
+  //   },
+  // })
+
   const response = await main();
 
   return Response.json({ response });

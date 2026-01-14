@@ -41,6 +41,24 @@ export default function DemoPage() {
       <Button onClick={handleBackground}>
         {loading2 ? "Loading..." : "Background"}
       </Button>
+      <Button
+        variant="destructive"
+        onClick={handleClientError}
+      >
+        client error
+      </Button>
+      <Button
+        variant="destructive"
+        onClick={handleApiError}
+      >
+        api error
+      </Button>
+      <Button
+        variant="destructive"
+        onClick={handleInngestError}
+      >
+        inngest error
+      </Button>
     </div>
   )
 }
