@@ -1,9 +1,17 @@
 "use client";
 
+import { Allotment } from "allotment";
+
 import { cn } from "@/lib/utils";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import { FileExplorer } from "./file-explorer";
+
+const DEFAULT_SIDEBAR_WIDTH = 350;
+const DEFAULT_MAIN_SIZE = 1000;
+const MIN_SIDEBAR_WIDTH = 200;
+const MAX_SIDEBAR_WIDTH = 800;
 
 const Tab = ({ label, isActive, onClick }: {
   label: string,
@@ -28,6 +36,9 @@ export const ProjectIdView = ({
 }: {
   projectId: Id<"projects">;
 }) => {
+  if (!projectId) {
+    return null;
+  }
   const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
 
   return (
@@ -51,7 +62,19 @@ export const ProjectIdView = ({
             )
           }
         >
-          <div>Editor</div>
+          <Allotment defaultSizes={[DEFAULT_SIDEBAR_WIDTH, DEFAULT_MAIN_SIZE]}>
+            <Allotment.Pane
+              snap
+              minSize={MIN_SIDEBAR_WIDTH}
+              maxSize={MAX_SIDEBAR_WIDTH}
+              preferredSize={DEFAULT_SIDEBAR_WIDTH}
+            >
+              <FileExplorer projectId={projectId}></FileExplorer>
+            </Allotment.Pane>
+            <Allotment.Pane>
+              <p>Editor view</p>
+            </Allotment.Pane>
+          </Allotment>
         </div>
         <div
           className={
