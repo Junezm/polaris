@@ -7,6 +7,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FileExplorer } from "./file-explorer";
+import { EditorView } from "@/features/editor/components/editor-view";
 
 const DEFAULT_SIDEBAR_WIDTH = 350;
 const DEFAULT_MAIN_SIZE = 1000;
@@ -72,7 +73,7 @@ export const ProjectIdView = ({
               <FileExplorer projectId={projectId}></FileExplorer>
             </Allotment.Pane>
             <Allotment.Pane>
-              <p>Editor view</p>
+              <EditorView projectId={projectId} />
             </Allotment.Pane>
           </Allotment>
         </div>
