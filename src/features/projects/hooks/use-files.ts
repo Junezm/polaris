@@ -57,3 +57,8 @@ export const useFolderContents = ({
 
 export const useRenameFile = () => useMutation(api.files.renameFile);
 export const useDeleteFile = () => useMutation(api.files.deleteFile);
+
+export const useFile = (fileId: Id<'files'> | null) => useQuery(api.files.getFile, fileId ? { fileId } : "skip");
+export const useFilePath = (fileId: Id<'files'> | null) => useQuery(api.files.getFilePath, fileId ? { fileId } : "skip");
+
+export const useUpdateFile = () => useMutation(api.files.updateFile);

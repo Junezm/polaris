@@ -29,7 +29,6 @@ export const getFiles = query({
 
 export const getFile = query({
   args: {
-    projectId: v.id("projects"),
     fileId: v.id("files"),
   },
   handler: async (ctx, args) => {
@@ -90,6 +89,47 @@ export const getFolderContents = query({
       }
       return a.name.localeCompare(b.name);
     })
+  },
+});
+
+
+export const getFilePath = query({
+  args: {
+    fileId: v.id("files"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await verifyAuth(ctx);
+
+    const file = await ctx.db.get("files", args.fileId);
+
+    if (!file) {
+      throw new Error("File not found");
+    }
+
+    const project = await ctx.db.get("projects", file.projectId);
+
+    if (!project) {
+      throw new Error("Project not found");
+    }
+
+    if (project.ownerId !== identity.subject) {
+      throw new Error("Unauthorized access to project");
+    }
+
+    const path: { _id: string, name: string }[] = [{
+      _id: file._id,
+      name: file.name,
+    }];
+    let current = file;
+
+    while (current.parentId) {
+      const parent = await ctx.db.get("files", current.parentId);
+      if (!parent) break;
+      path.unshift({ _id: parent._id, name: parent.name });
+      current = parent;
+    }
+
+    return path;
   },
 });
 
