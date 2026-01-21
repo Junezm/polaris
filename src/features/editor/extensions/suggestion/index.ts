@@ -86,8 +86,8 @@ const generatePayload = (view: EditorView, fileName: string) => {
     textAfterCursor: currentLine.text.slice(cursorInLine),
     nextLines: nextLines.join("\n"),
     lineNumber: currentLine.number,
-  }
-}
+  };
+};
 
 const createDebouncePlugin = (fileName: string) => {
   return ViewPlugin.fromClass(
@@ -126,6 +126,8 @@ const createDebouncePlugin = (fileName: string) => {
             currentAbortController.signal
           );
 
+          // const suggestion = "hhhhhhhhhhhhhhhhhhhhhhh";
+
           isWaitingForSuggestion = false;
           view.dispatch({
             effects: setSuggestionEffect.of(suggestion),
@@ -143,8 +145,8 @@ const createDebouncePlugin = (fileName: string) => {
         }
       }
     }
-  )
-}
+  );
+};
 
 const renderPlugin = ViewPlugin.fromClass(
   class {
