@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, Inter } from "next/font/google";
 import ConvexClientProvider from "@/components/providers";
 
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,11 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${plexMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${plexMono.variable} antialiased`}>
         <ConvexClientProvider>
           {children}
+          <Toaster />
         </ConvexClientProvider>
       </body>
     </html>
