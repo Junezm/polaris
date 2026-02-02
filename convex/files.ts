@@ -74,7 +74,7 @@ export const getFolderContents = query({
 
     const files = await ctx.db
       .query("files")
-      .withIndex("by_project__parent", (q) =>
+      .withIndex("by_project_parent", (q) =>
         q.eq("projectId", args.projectId)
           .eq("parentId", args.parentId))
       .collect();
@@ -158,7 +158,7 @@ export const createFiles = mutation({
 
     const files = await ctx.db
       .query("files")
-      .withIndex("by_project__parent", (q) =>
+      .withIndex("by_project_parent", (q) =>
         q.eq("projectId", args.projectId)
           .eq("parentId", args.parentId))
       .collect();
@@ -210,7 +210,7 @@ export const createFolder = mutation({
 
     const files = await ctx.db
       .query("files")
-      .withIndex("by_project__parent", (q) =>
+      .withIndex("by_project_parent", (q) =>
         q.eq("projectId", args.projectId)
           .eq("parentId", args.parentId))
       .collect();
@@ -263,7 +263,7 @@ export const renameFile = mutation({
 
     const siblings = await ctx.db
       .query("files")
-      .withIndex("by_project__parent", (q) =>
+      .withIndex("by_project_parent", (q) =>
         q.eq("projectId", file.projectId)
           .eq("parentId", file.parentId))
       .collect();
@@ -318,7 +318,7 @@ export const deleteFile = mutation({
       if (item.type === "folder") {
         const children = await ctx.db
           .query("files")
-          .withIndex("by_project__parent", (q) =>
+          .withIndex("by_project_parent", (q) =>
             q.eq("projectId", item.projectId)
               .eq("parentId", fileId))
           .collect();
