@@ -8,6 +8,7 @@ import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FileExplorer } from "./file-explorer";
 import { EditorView } from "@/features/editor/components/editor-view";
+import {PreviewView} from "@/features/projects/components/preview-view";
 
 const DEFAULT_SIDEBAR_WIDTH = 350;
 const DEFAULT_MAIN_SIZE = 1000;
@@ -85,7 +86,7 @@ export const ProjectIdView = ({
             )
           }
         >
-          <div>Preview</div>
+          <PreviewView projectId={projectId} />
         </div>
       </div>
     </div>
