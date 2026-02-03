@@ -169,6 +169,19 @@ export const getProjectFiles = query({
   },
 });
 
+// Used for Agent "ReadFiles" tool
+export const getFileById = query({
+  args: {
+    internalKey: v.string(),
+    fileId: v.id("files"),
+  },
+  handler: async (ctx, args) => {
+    validateInternalKey(args.internalKey);
+
+    return await ctx.db.get(args.fileId);
+  },
+});
+
 export const updateFile = mutation({
   args: {
     internalKey: v.string(),
