@@ -6,7 +6,7 @@ export default async function Layout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ projectId: Id<"projects"> }>
+  params: Promise<{ projectId: string }>
 }) {
 
   const safeParseOpenAIJson = (str: string) => {
@@ -33,7 +33,7 @@ export default async function Layout({
   }
   const { projectId } = await params;
   return <ProjectIdLayout
-    projectId={projectId}
+    projectId={projectId as Id<"projects">}
   >
     {children}
   </ProjectIdLayout>;
