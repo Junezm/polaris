@@ -5,6 +5,7 @@ import { css } from "@codemirror/lang-css";
 import { json } from "@codemirror/lang-json";
 import { markdown } from "@codemirror/lang-markdown";
 import { python } from "@codemirror/lang-python";
+import { vue } from "@codemirror/lang-vue"
 
 export const getLanguageExtension = (filename: string): Extension => {
   const ext = filename.split(".").pop()?.toLowerCase();
@@ -18,6 +19,8 @@ export const getLanguageExtension = (filename: string): Extension => {
       return javascript({ typescript: true });
     case "tsx":
       return javascript({ typescript: true, jsx: true });
+    case "vue":
+      return vue();
     case "html":
       return html();
     case "css":

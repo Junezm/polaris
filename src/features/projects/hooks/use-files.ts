@@ -37,6 +37,9 @@ import { boolean } from "zod/v4";
 //     name: 'New Folder',
 //   });
 // }
+export const useFiles = (projectId: Id<"projects"> | null) => {
+  return useQuery(api.files.getFiles, projectId ? { projectId } : "skip");
+};
 
 export const useCreateFile = () => useMutation(api.files.createFiles);
 export const useCreateFolder = () => useMutation(api.files.createFolder);
