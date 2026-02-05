@@ -18,6 +18,7 @@ import { useCreateProjects } from "../hooks/use-projects";
 import { useEffect, useState } from "react";
 import { ProjectsCommandDialog } from "./projects-command-dialog";
 import { ImportGithubDialog } from "./import-github-dialog";
+import { NewProjectDialog } from "./new-project-dialog";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export const ProjectsView = () => {
   const createProject = useCreateProjects();
   const [commandDialogOpen, setCommandDialogOpen] = useState(false);
   const [importDialogOpen, setImportDialogOpen] = useState(false);
+  const [newProjectDialogOpen, setNewProjectDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -39,6 +41,10 @@ export const ProjectsView = () => {
         if (e.key === "i") {
           e.preventDefault();
           setImportDialogOpen(true);
+        }
+        if (e.key === "j") {
+          e.preventDefault();
+          setNewProjectDialogOpen(true);
         }
       }
     };
@@ -57,6 +63,10 @@ export const ProjectsView = () => {
       <ImportGithubDialog
         open={importDialogOpen}
         onOpenChange={setImportDialogOpen}
+      />
+      <NewProjectDialog
+        open={newProjectDialogOpen}
+        onOpenChange={setNewProjectDialogOpen}
       />
       <div className="min-h-screen bg-sidebar flex flex-col items-center justify-center p-6 sm:p-16">
         <div className="w-full max-w-sm mx-auto flex flex-col items-center gap-4">
@@ -82,16 +92,17 @@ export const ProjectsView = () => {
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant="outline"
-                onClick={() => {
-                  const projectName = uniqueNamesGenerator({
-                    dictionaries: [adjectives, animals, colors],
-                    separator: "-",
-                    length: 3,
-                  });
-                  createProject({
-                    name: projectName,
-                  });
-                }}
+                // onClick={() => {
+                //   const projectName = uniqueNamesGenerator({
+                //     dictionaries: [adjectives, animals, colors],
+                //     separator: "-",
+                //     length: 3,
+                //   });
+                //   createProject({
+                //     name: projectName,
+                //   });
+                // }}
+                onClick={() => setNewProjectDialogOpen(true)}
                 className="h-full flex flex-col items-start justify-start p-4 bg-background border gap-6 rounded-none"
               >
                 <div className="flex justify-between items-center w-full">

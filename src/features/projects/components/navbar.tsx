@@ -20,7 +20,7 @@ export const Navbar = ({ projectId }: { projectId: Id<"projects"> }) => {
   const project = useProjectById(projectId);
 
   console.log('---', project);
-  const renameProject = useRenameProject(projectId);
+  const renameProject = useRenameProject();
   const [isRename, setIsRename] = useState(false);
   const [name, setName] = useState('');
 
