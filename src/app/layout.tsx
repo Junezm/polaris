@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   description: "Ai code editor",
 };
 
+/**
+ * Root layout component that sets up global providers, fonts, theme, and header, then renders page content.
+ *
+ * @param children - The page content to render inside the layout
+ * @returns The top-level layout element configured with authentication, theme, and typography, containing a header with sign-in/sign-up controls and the provided `children`
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
