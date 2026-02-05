@@ -9,6 +9,7 @@ import { FaGithub } from "react-icons/fa";
 import { FileExplorer } from "./file-explorer";
 import { EditorView } from "@/features/editor/components/editor-view";
 import {PreviewView} from "@/features/projects/components/preview-view";
+import { ExportPopover } from "./export-popover";
 
 const DEFAULT_SIDEBAR_WIDTH = 350;
 const DEFAULT_MAIN_SIZE = 1000;
@@ -38,10 +39,11 @@ export const ProjectIdView = ({
 }: {
   projectId: Id<"projects">;
 }) => {
+  const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
+
   if (!projectId) {
     return null;
   }
-  const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
 
   return (
     <div className="flex flex-col h-full">
@@ -49,10 +51,11 @@ export const ProjectIdView = ({
         <Tab label="Code" isActive={activeTab === 'editor'} onClick={() => setActiveTab('editor')} />
         <Tab label="Preview" isActive={activeTab === 'preview'} onClick={() => setActiveTab('preview')} />
         <div className="flex-1 flex justify-end h-full">
-          <div className="flex items-center gap-1.5 h-full px-3 cursor-pointer text-muted-foreground border-l hover:bg-accent/30">
-            <FaGithub className="size-3.5"></FaGithub>
-            <span className="text-sm">Export</span>
-          </div>
+          {/*<div className="flex items-center gap-1.5 h-full px-3 cursor-pointer text-muted-foreground border-l hover:bg-accent/30">*/}
+          {/*  <FaGithub className="size-3.5"></FaGithub>*/}
+          {/*  <span className="text-sm">Export</span>*/}
+          {/*</div>*/}
+          <ExportPopover projectId={projectId} />
         </div>
       </nav>
       <div className="flex-1 relative">
